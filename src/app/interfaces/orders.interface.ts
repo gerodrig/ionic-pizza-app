@@ -12,7 +12,7 @@ export interface Pizza {
     price: number,
     topping: string,
     size: string,
-    date: Date
+    //date: Date
 }
 
 export interface Topping {

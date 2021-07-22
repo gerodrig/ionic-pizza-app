@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MyOrderPageRoutingModule } from './my-order-routing.module';
+import { PreviousOrdersPageRoutingModule } from './previous-orders-routing.module';
 
-import { MyOrderPage } from './my-order.page';
+import { PreviousOrdersPage } from './previous-orders.page';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from '../../components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    MyOrderPageRoutingModule,
+    PreviousOrdersPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [MyOrderPage]
+  declarations: [PreviousOrdersPage]
 })
-export class MyOrderPageModule {}
+export class PreviousOrdersPageModule {}

@@ -15,6 +15,18 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'checkCurrentOrder',
+    loadChildren: () => import('./pages/check-current-orders/check-current-orders.module').then( m => m.CheckCurrentOrdersPageModule)
+  },
+  {
+    path: 'updateCurentOrder',
+    loadChildren: () => import('./pages/update-current-order/update-current-order.module').then( m => m.UpdateCurrentOrderPageModule)
+  },
+  {
+    path: 'previousOrders',
+    loadChildren: () => import('./pages/previous-orders/previous-orders.module').then( m => m.PreviousOrdersPageModule)
+  },
 ];
 
 @NgModule({

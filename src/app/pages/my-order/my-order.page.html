@@ -1,9 +1,29 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>myOrder</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+
+  <div class="buttons">
+
+    <ion-button class="center" expand="block" color="light" routerLink="/checkCurrentOrder">
+      <ion-icon name="bag-check-outline"></ion-icon>
+      Check Current Order
+    </ion-button>
+    
+    <ion-button expand="block" color="light" routerLink="/home">
+      <ion-icon name="arrow-up-circle-outline"></ion-icon>
+      Update Current Order
+    </ion-button>
+    
+    <ion-button expand="block" color="light" routerLink="/previousOrders">
+      <ion-icon name="book-outline"></ion-icon>
+      Previous Orders
+    </ion-button>
+  
+    <ion-button expand="block" color="light" (click)="newOrder()">
+      <ion-icon name="refresh-circle-outline"></ion-icon>
+      New Order
+    </ion-button>
+
+  </div>
 
 </ion-content>

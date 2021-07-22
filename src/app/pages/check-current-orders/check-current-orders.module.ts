@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MyOrderPageRoutingModule } from './my-order-routing.module';
+import { CheckCurrentOrdersPageRoutingModule } from './check-current-orders-routing.module';
 
-import { MyOrderPage } from './my-order.page';
+import { CheckCurrentOrdersPage } from './check-current-orders.page';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from '../../components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    MyOrderPageRoutingModule,
+    CheckCurrentOrdersPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [MyOrderPage]
+  declarations: [CheckCurrentOrdersPage]
 })
-export class MyOrderPageModule {}
+export class CheckCurrentOrdersPageModule {}

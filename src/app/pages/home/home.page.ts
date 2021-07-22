@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
 
   qtyOrdered: string = 'none';
 
-  public currentPizza: Pizza = {qty: 0,  price: 0, topping: '', size: '', date: null };
+  public currentPizza: Pizza = {qty: 0,  price: 0, topping: '', size: '' };
   public toppingSelected: boolean = false;
   public sizeSelected: boolean = false;
   public currentTopping: Topping = {name: '0', price: 0};
@@ -59,6 +59,26 @@ export class HomePage implements OnInit {
     //get the values of my toppings and sizes from the service
     this.toppings = this.data.getToppings;
     this.sizes = this.data.getSizes;
+
+
+  }
+
+  ionViewDidEnter(){
+
+    if(this.data.getOrder === null){
+
+      this.order = [];
+      this.qty = 0
+      this.total = 0;
+      
+      console.log('did enter and order was null', "current order value", this.order);
+      return;
+    }
+
+    this.order = this.data.getOrder.order;
+    this.qty = this.data.getOrder.quantity;
+    this.total = this.data.getOrder.total;
+    console.log(this.order, this.qty, this.total);
   }
 
   selectTopping (event: any, topping: Topping){
@@ -91,29 +111,35 @@ export class HomePage implements OnInit {
         text: 'Quantity, Topping and Size MUST be selected',
       });
 
+      console.log(this.order);
       return;
     }
 
-    this.total += (this.currentTopping.price + this.currentSize.price) * parseInt(this.qtyOrdered);
     this.qty += parseInt(this.qtyOrdered);
     this.currentPizza = {
       qty: parseInt(this.qtyOrdered), 
-      price: this.total,
+      price: (this.currentTopping.price + this.currentSize.price) * parseInt(this.qtyOrdered),
       topping: this.currentTopping.name,
       size: this.currentSize.size,
-      date: new Date()
     }
+    this.total += this.currentPizza.price;
     this.order.push( this.currentPizza );
     Success.fire({
       icon: 'success',
       title: 'Success!!',
       text: `Your order has now ${this.qty} pizza${this.qty === 1 ? '' : 's'}, and the total is ${this.total.toFixed(2)} CAD`
-    })
+    });
+
+    this.data.setOrder(this.order, this.qty, this.total);
     console.log('order was added');
     console.log(this.order);
     console.log(this.qtyOrdered);
 
     return this.clear();
+  }
+
+  clearOrder(){
+    this.order = [];
   }
 
 }

@@ -1,0 +1,38 @@
+<app-header></app-header>
+
+<ion-content class="ion-no-padding" *ngIf="ordersHistory.length > 0; else noOrders">
+    <ion-text class="ion-text-center">
+        <div class="header"> 
+            <h2>Transactions History</h2>
+        </div>
+    </ion-text>
+
+    <ion-list>
+
+        <ion-item *ngFor="let order of ordersHistory">   
+            <ion-label>
+                <ion-grid class="ion-no-padding">
+                    <ion-row>
+                        <ion-col size="12" class="ion-align-items-start">
+                            <p class="date">{{order.purchaseDate | date: 'medium'}}</p>
+                            <p class="history">Amount paid: ${{ order.total | number: '1.2-2' }} CAD, total pizzas ordered {{ order.quantity }}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-label>
+        </ion-item>
+
+    </ion-list>
+
+
+</ion-content>
+
+<ng-template #noOrders>
+    <ion-content class="ion-no-padding">
+        <ion-text class="ion-text-center">
+            <div class="header"> 
+                <p>No orders have been purchased</p>
+            </div>
+        </ion-text>
+    </ion-content>
+</ng-template>

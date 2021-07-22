@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Topping, PizzaSize } from '../interfaces/orders.interface';
+import { Topping, PizzaSize, Order, Pizza } from '../interfaces/orders.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
+
+  private _myOrders: Order = null;
+
+  private _myCurrentOrder: Pizza[] = [];
 
   private _toppings: Topping[] = [
     {
@@ -50,6 +54,36 @@ export class OrderService {
 
   get getSizes(): PizzaSize[]{
     return [...this._sizes]
+  }
+
+  get getOrder(): Order{
+
+    return this._myOrders
+  }
+
+  get getCurrentOrder(): Pizza[]{
+
+    return this._myCurrentOrder;
+  }
+
+  setOrder(order: Pizza[], quantity:number, total: number) {
+    this._myOrders = {
+      order,
+      quantity,
+      purchaseDate: new Date,
+      total
+    }
+  }
+
+  updateOrder(order: Order){
+    this._myOrders = order;
+    this._myCurrentOrder = this._myOrders.order;
+    console.log(this._myOrders);
+  }
+
+  clearOrder(){
+    this._myOrders = null;
+    this._myCurrentOrder = [];
   }
 
   constructor() { }
