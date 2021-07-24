@@ -32,7 +32,7 @@
           <ion-list>
 
                 <ion-item *ngFor="let topping of toppings" 
-                          (click)="selectTopping($event, topping)"
+                          (click)="selectTopping(topping)"
                           [color]=" topping.name === currentTopping.name ? 'warning' : '' ">
                   <ion-label>
                     {{topping.name}}
@@ -49,7 +49,7 @@
           <ion-list>
             
             <ion-item *ngFor="let size of sizes"
-                      (click)="selectSize($event, size)"
+                      (click)="selectSize(size)"
                       [color]=" size.size === currentSize.size ? 'warning' : '' ">
               <ion-label>
                 {{size.size}}

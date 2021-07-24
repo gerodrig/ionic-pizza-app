@@ -15,7 +15,7 @@ import { Error, Success } from '../../interfaces/modals';
 
 export class HomePage implements OnInit {
   
-
+//declare all the local variables used on this page
   order: Pizza[] = [];
   toppings: Topping[];
   sizes: PizzaSize[];
@@ -31,17 +31,20 @@ export class HomePage implements OnInit {
   public total: number = 0;
 
   
-
+//function to manage the calculator in the app register component
   numberSelected(num: number){
 
+    //logic for reset button
     if(num === -1 )
       return this.clear();      
 
+    //logic to add button
     if(num === -2 ){      
         
         return this.add();
     }
 
+    //logic to update the quantity field restricting the field to a maximum of 99
     if(this.qtyOrdered === 'none')
         return this.qtyOrdered = num.toString();
     
@@ -56,7 +59,7 @@ export class HomePage implements OnInit {
   constructor(private data: OrderService) { }
 
   ngOnInit() {
-    //get the values of my toppings and sizes from the service
+    //get the values of my toppings and sizes from the service.
     this.toppings = this.data.getToppings;
     this.sizes = this.data.getSizes;
 
@@ -65,32 +68,35 @@ export class HomePage implements OnInit {
 
   ionViewDidEnter(){
 
+    //every time this page is loaded it will check that the date in our order has at least one order.
     if(this.data.getOrder === null){
-
+      //if the order in our service is null then all local variables will be reset.
       this.order = [];
       this.qty = 0
       this.total = 0;
-      
-      console.log('did enter and order was null', "current order value", this.order);
-      return;
+
+      return; // after null validation did enter function will end.
     }
 
+    //if there is an order active in our service then all local variables will be loaded to keep track of the updates.
     this.order = this.data.getOrder.order;
     this.qty = this.data.getOrder.quantity;
     this.total = this.data.getOrder.total;
-    console.log(this.order, this.qty, this.total);
   }
 
-  selectTopping (event: any, topping: Topping){
+  //function to keep track of the topping selected.
+  selectTopping (topping: Topping){
     this.currentTopping = topping;
     this.toppingSelected = true;
   }
   
-  selectSize(event: any, size: PizzaSize){
+  //function to keep track of the size selected.
+  selectSize(size: PizzaSize){
     this.currentSize = size;
     this.sizeSelected= true;
   }
 
+  //function to clear all our local variables to default state.
   clear(){
     this.qtyOrdered = 'none';
     this.currentTopping = {name: '0', price: 0};;
@@ -98,23 +104,22 @@ export class HomePage implements OnInit {
     this.toppingSelected = false;
     this.sizeSelected = false;
 
-    return;
-
   }
 
+  //function to add the pizza that we select to our order.
   add(){
-
+    //data validation to ensure that a valid order is placed.
     if(this.currentSize.size === '0' || this.currentTopping.name === '0' || this.qtyOrdered === 'none' || this.qtyOrdered ==='0') {
-      Error.fire({
+      //fire modal in case the data selected is invalid.
+      return Error.fire({
         icon: 'error',
         title: 'Error',
         text: 'Quantity, Topping and Size MUST be selected',
       });
 
-      console.log(this.order);
-      return;
     }
 
+    //assign selectedattributes to order.
     this.qty += parseInt(this.qtyOrdered);
     this.currentPizza = {
       qty: parseInt(this.qtyOrdered), 
@@ -124,22 +129,19 @@ export class HomePage implements OnInit {
     }
     this.total += this.currentPizza.price;
     this.order.push( this.currentPizza );
+
+    //launch modal indicating that order was added.
     Success.fire({
       icon: 'success',
       title: 'Success!!',
       text: `Your order has now ${this.qty} pizza${this.qty === 1 ? '' : 's'}, and the total is ${this.total.toFixed(2)} CAD`
     });
 
+    //save the order in our service.
     this.data.setOrder(this.order, this.qty, this.total);
-    console.log('order was added');
-    console.log(this.order);
-    console.log(this.qtyOrdered);
 
-    return this.clear();
-  }
-
-  clearOrder(){
-    this.order = [];
+    //clear all local variables to default values.
+    this.clear();
   }
 
 }

@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MyOrderPageRoutingModule } from './my-order-routing.module';
+import { MyOrderPageRoutingModule } from './order-manager-routing.module';
 
-import { MyOrderPage } from './my-order.page';
+import { MyOrderPage } from './order-manager.page';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({

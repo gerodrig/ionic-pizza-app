@@ -1,4 +1,3 @@
-import { NumberSymbol } from "@angular/common";
 
 export interface Order {
     order: Pizza[];
@@ -12,12 +11,6 @@ export interface Pizza {
     price: number,
     topping: string,
     size: string,
-    //date: Date
-}
-
-export interface Topping {
-    name: string,
-    price: number
 }
 
 export interface Topping {

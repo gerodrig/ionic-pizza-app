@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+//lazy loading routing structure.
 const routes: Routes = [
   {
     path: 'home',
@@ -8,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'myOrder',
-    loadChildren: () => import('./pages/my-order/my-order.module').then( m => m.MyOrderPageModule)
+    loadChildren: () => import('./pages/order-manager/order-manager.module').then( m => m.MyOrderPageModule)
   },
   {
     path: '',
@@ -18,10 +19,6 @@ const routes: Routes = [
   {
     path: 'checkCurrentOrder',
     loadChildren: () => import('./pages/check-current-orders/check-current-orders.module').then( m => m.CheckCurrentOrdersPageModule)
-  },
-  {
-    path: 'updateCurentOrder',
-    loadChildren: () => import('./pages/update-current-order/update-current-order.module').then( m => m.UpdateCurrentOrderPageModule)
   },
   {
     path: 'previousOrders',

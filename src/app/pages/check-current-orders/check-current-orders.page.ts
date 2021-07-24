@@ -18,29 +18,21 @@ export class CheckCurrentOrdersPage implements OnInit {
 
   ngOnInit() {
   
-    console.log(this.order.getOrder);
+    //on init the order from the service will be saved on local variables
     this.myOrder = this.order.getOrder;
 
-    //console.log(this.myOrder);
-
+    //validation that there is one valid order so place order button can be enabled
     if(this.myOrder !== null ) {
       this.isOrder = true;
-      //console.log(this.isOrder);
     }
   }
 
-  ionViewDidLeave(){
-
-    if(!this.isOrder){
-      this.myOrder = null;
-    }
-    console.log('did Leave', this.isOrder, this.myOrder)
-  }
-
+//place order function that saves the order to the service
   placeOrder(){
 
     this.history.addOrder(this.myOrder);
     
+    //launch modal when order is placed
     Confirm.fire({
       icon: 'success',
       title: 'Thank you!',
@@ -49,22 +41,24 @@ export class CheckCurrentOrdersPage implements OnInit {
 
   }
 
+  //function to remove one of the items in our order
   removeItem(index: number){
 
+    //if our order contains only one kind of pizza then our order is reset
     if(this.myOrder.order.length <= 1) {
       this.isOrder = false;
-      //this.myOrder = null;
 
       return this.order.clearOrder();
 
     }
 
+    //if only one item is deleted then our order is updated
     this.myOrder.quantity -= this.myOrder.order[index].qty
     this.myOrder.total -= this.myOrder.order[index].price
     this.myOrder.order.splice(index, 1);
 
-    console.log(this.myOrder)
 
+    //update the order in our service
     this.order.updateOrder(this.myOrder);
 
   }
